@@ -4,7 +4,7 @@
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
 ![iOS SDK](https://img.shields.io/cocoapods/v/HyperTrack)
 
-[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example iOS app that has everything you need to get started in minutes.
+[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons.
 
 * [Publishable Key](#publishable-key)–Sign up and get your keys
 * [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
@@ -27,7 +27,7 @@ Next, you can [start with the Quickstart app](https://github.com/hypertrack/quic
 
 ### Requirements
 
-HyperTrack SDK supports iOS 10 and above, using Swift or Objective-C.
+HyperTrack SDK supports iOS 11 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
@@ -48,7 +48,7 @@ We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [instal
 Using command line run `pod init` in your project directory to create a Podfile. Put the following code (changing target placeholder to your target name) in the Podfile:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '11.0'
 inhibit_all_warnings!
 
 target '<Your app name>' do
@@ -58,7 +58,7 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    if ['GRDB.swift', 'CocoaLumberjack'].include? target.name
+    if ['GRDB.swift'].include? target.name
       target.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '4.2'
       end
