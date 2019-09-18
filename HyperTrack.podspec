@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # Root specification
   spec.name                     = "HyperTrack"
-  spec.version                  = "3.7.0"
+  spec.version                  = "3.7.1"
   spec.summary                  = "A Movement tracking SDK for iOS"
   spec.description              = "HyperTrack is a Movement tracking SDK"
   spec.license                  = { :type => 'Copyright', :text => 'Copyright (c) 2018 HyperTrack, Inc. (https://www.hypertrack.com)' }
@@ -18,6 +18,6 @@ Pod::Spec.new do |spec|
   spec.ios.vendored_frameworks  = 'HyperTrack.framework'
 
   # Build settings
-  spec.dependency                 'GRDB.swift', '3.6.2'
+  spec.dependency                 'GRDB.swift', '4.4.0'
 
 end
