@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # Root specification
   spec.name                     = "HyperTrack"
-  spec.version                  = "4.0.0-rc.15"
+  spec.version                  = "4.0.0-rc.17"
   spec.summary                  = "A Movement tracking SDK for iOS"
   spec.description              = "HyperTrack is a Movement tracking SDK"
   spec.license                  = { :type => "Copyright", :text => "Copyright (c) 2018 HyperTrack, Inc. (https://www.hypertrack.com)" }
@@ -23,8 +23,8 @@ Pod::Spec.new do |spec|
     subspec.exclude_files       = "HTSDK.swift"
   end
 
-  spec.subspec "Objective" do |subspec|
-    subspec.dependency            "Swift"
+  spec.subspec "Objective-C" do |subspec|
+    subspec.dependency            "HyperTrack/Swift"
     subspec.source_files        = "HTSDK.swift"
   end
 
