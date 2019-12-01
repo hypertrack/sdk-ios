@@ -24,6 +24,7 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec "Objective" do |subspec|
+    subspec.dependency            "Swift"
     subspec.source_files        = "HTSDK.swift"
   end
 
