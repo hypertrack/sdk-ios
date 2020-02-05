@@ -27,18 +27,17 @@ Next, you can [start with the Quickstart app](https://github.com/hypertrack/quic
 
 ### Requirements
 
-HyperTrack SDK supports iOS 11 and above, using Swift or Objective-C.
+HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
 1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
 2. [Enable background location updates](#step-2-enable-background-location-updates)
-3. [Add purpose strings](#step-3-add-purpose-strings)
+3. [Handle location and motion permissions](#step-3-handle-location-and-motion-permissions)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Enable remote notifications](#step-5-enable-remote-notifications)
-6. [(optional) Start and stop tracking manually](#step-6-optional-start-and-stop-tracking-manually)
-7. [(optional) Identify devices](#step-7-optional-identify-devices)
-8. [(optional) Send custom events](#step-8-optional-send-custom-events)
+6. [(optional) Identify devices](#step-6-optional-identify-devices)
+7. [(optional) Set trip markers](#step-7-optional-set-a-trip-marker)
 
 
 #### Step 1. Add HyperTrack SDK to your Podfile
@@ -48,14 +47,25 @@ We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [instal
 Using command line run `pod init` in your project directory to create a Podfile. Put the following code (changing target placeholder to your target name) in the Podfile:
 
 ```ruby
-platform :ios, '11.0'
+platform :ios, '9.0'
 inhibit_all_warnings!
 
-target '<Your app name>' do
+target 'YourApp' do
   use_frameworks!
-  pod 'HyperTrack'
+  pod 'HyperTrack', '4.0.1'
 end
+```
 
+Run `pod install`. CocoaPods will build the dependencies and create a workspace (`.xcworkspace`) for you.
+
+If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you.
+
+If you are using Xcode 10.1, which doesn't support Swift 5, add this `post_install` script at the bottom of your Podfile:
+
+<details>
+<summary>Show code block</summary>
+
+```ruby
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     if ['GRDB.swift'].include? target.name
@@ -67,9 +77,7 @@ post_install do |installer|
 end
 ```
 
-Run `pod install`. CocoaPods will build the dependencies and create a workspace (`.xcworkspace`) for you.
-
-If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you.
+</details>
 
 #### Step 2. Enable background location updates
 
@@ -77,19 +85,16 @@ Enable Background Modes in your project target's Capabilities tab. Choose "Locat
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-#### Step 3. Add purpose strings
+#### Step 3. Handle location and motion permissions
 
 Set the following purpose strings in the `Info.plist` file:
 
 ![Always authorization location](Images/Always_Authorization.png)
 
-Include `Privacy - Location Always Usage Description` key only when you need iOS 10 compatibility.
+HyperTrack SDK requires "Always" permissions to reliably track user's location.
+Be advised, purpose strings are mandatory.
 
-You can ask for "When In Use" permission only, but be advised that the device will see a blue bar at the top while your app is running.
-
-![In use authorization location](Images/In_Use_Authorization.png)
-
-Be advised, purpose strings are mandatory, and the app crashes without them.
+Your app needs to make sure that it has location and motion permissions for location tracking to work. See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
 
 #### Step 4. Initialize the SDK
 
@@ -97,15 +102,34 @@ Put the initialization call inside your `AppDelegate`'s `application:didFinishLa
 
 ##### Swift
 
+<details>
+<summary>Handling production/development errors:</summary>
+
 ```swift
-HyperTrack.initialize(
-    publishableKey: "<#Paste your Publishable Key here#>",
-    delegate: self,
-    startsTracking: true,
-    requestsPermissions: true)
+let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
+
+switch HyperTrack.makeSDK(publishableKey: publishableKey) {
+case let .success(hyperTrack):
+  // Use `hyperTrack` instance
+case let .failure(fatalError):
+  // Handle errors, for example using switch
+}
 ```
 
-You can omit `delegate`, `startsTracking`, and `requestsPermissions` in Swift. They are `nil`, `true`, `true` by default.
+</details>
+
+<details>
+<summary>Ignoring any errors:</summary>
+
+```swift
+let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
+
+if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
+  // Use `hyperTrack` instance
+}
+```
+
+</details>
 
 ##### Objective-C
 
@@ -115,48 +139,217 @@ Import the SDK:
 @import HyperTrack;
 ```
 
-Initialize the SDK:
+Initialize the SDK.
+
+<details>
+<summary>Handling production/development errors:</summary>
 
 ```objc
-[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>"
-                           delegate:self
-                     startsTracking:true
-                requestsPermissions:true];
-```
+NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
-* Delegate method is called if the SDK encounters a critical error that prevents it from running. This includes:
-  - Initialization errors, like denied Location or Motion permissions (`.permissionDenied`)
-  - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`.authorizationError`)
-  - Incorrectly typed Publishable Key (`.invalidPublishableKey`)
-  - General errors. Please contact support if you encounter those (`.generalError`)
-
-##### Swift
-
-```swift
-extension AppDelegate: HyperTrackDelegate {
-  func hyperTrack(_ hyperTrack: HyperTrack.Type, didEncounterCriticalError criticalError: HyperTrackCriticalError) {
-    /// Handle errors here
+HTResult *result = [HTSDK makeSDKWithPublishableKey:publishableKey];
+if (result.hyperTrack != nil) {
+  // Use `hyperTrack` instance from `result.hyperTrack`
+} else {
+  // Handle errors, for example using switch:
+  switch ([result.error code]) {
+    case HTFatalErrorProductionLocationServicesUnavalible:
+    case HTFatalErrorProductionMotionActivityServicesUnavalible:
+      // Handle a case where device is fully untrackable (either iPhone 5 or lower
+      // or not an iPhone
+      break;
+    case HTFatalErrorProductionMotionActivityPermissionsDenied:
+      // Handle motion permissions denied error. Enabling permissions will
+      // restart the app
+    default:
+      // Other errors should only happen during development
+      break;
   }
 }
 ```
 
-##### Objective-C
+</details>
+
+<details>
+<summary>Ignoring errors:</summary>
 
 ```objc
-@interface AppDelegate () <HTSDKDelegate>
-@end
+NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
-@implementation AppDelegate
-
-- (void)hyperTrack:(Class)hyperTrack didEncounterCriticalError:(HTSDKCriticalError *)criticalError {
-    /// Handle errors here
+HTSDK *hyperTrack = [[HTSDK alloc] initWithPublishableKey:publishableKey];
+if (hyperTrack != nil) {
+  // Use `hyperTrack` instance
 }
-
-@end
 ```
 
-* `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method.
-* `requestsPermissions: true` will request Location and Motion permissions on your behalf.
+</details>
+
+##### NSNotifications
+
+Restorable and Unrestorable error notifications are called if the SDK encounters an error that prevents it from tracking. SDK can recover in runtime from Restorable errors if the error reason is resolved. Errors include:
+  - Initialization errors, like denied Location or Motion permissions (`RestorableError.locationPermissionsDenied`)
+  - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`RestorableError.trialEnded`)
+  - Incorrectly typed Publishable Key (`UnrestorableError.invalidPublishableKey`)
+
+###### Swift
+
+<details>
+<summary>If you want to handle errors using the same selector:</summary>
+
+```swift
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(trackingError(notification:)),
+  name: HyperTrack.didEncounterUnrestorableErrorNotification,
+  object: nil
+)
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(trackingError(notification:)),
+  name: HyperTrack.didEncounterRestorableErrorNotification,
+  object: nil
+)
+
+...
+
+@objc func trackingError(notification: Notification) {
+  if let trackingError = notification.hyperTrackTrackingError() {
+    // Handle TrackingError, which is an enum of Restorable or Unrestorable error
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:</summary>
+
+```swift
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(unrestorableError(notification:)),
+  name: HyperTrack.didEncounterUnrestorableErrorNotification,
+  object: nil
+)
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(restorableError(notification:)),
+  name: HyperTrack.didEncounterRestorableErrorNotification,
+  object: nil
+)
+
+...
+
+@objc func restorableError(notification: Notification) {
+  if let restorableError = notification.hyperTrackRestorableError() {
+    // Handle RestorableError
+  }
+}
+
+@objc func unrestorableError(notification: Notification) {
+  if let unrestorableError = notification.hyperTrackUnrestorableError() {
+    // Handle UnrestorableError
+  }
+}
+```
+
+</details>
+
+###### Objective-C
+
+<details>
+<summary>If you want to handle errors using the same selector:</summary>
+
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredTrackingError:)
+                                             name:HTSDK.didEncounterRestorableErrorNotification
+                                           object:nil];
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredTrackingError:)
+                                             name:HTSDK.didEncounterUnrestorableErrorNotification
+                                           object:nil];
+
+...
+
+- (void)hyperTrackEncounteredTrackingError:(NSNotification *)notification {
+  // Use tracking error helper
+  NSError *error = [notification hyperTrackTrackingError];
+  if (error != nil) {
+    if ([[error domain] isEqualToString:NSError.HTRestorableErrorDomain]) {
+      // Handle restorable error
+    } else if ([[error domain] isEqualToString:NSError.HTUnrestorableErrorDomain]) {
+      // Handle unrestorable error
+    }
+  }
+}
+
+```
+
+</details>
+
+<details>
+<summary>If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:</summary>
+
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredRestorableError:)
+                                             name:HTSDK.didEncounterRestorableErrorNotification
+                                           object:nil];
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredUnrestorableError:)
+                                             name:HTSDK.didEncounterUnrestorableErrorNotification
+                                           object:nil];
+
+...
+
+- (void)hyperTrackEncounteredRestorableError:(NSNotification *)notification {
+  NSError *restorableError = [notification hyperTrackRestorableError]);
+  // Handle RestorableError
+ }
+
+- (void)hyperTrackEncounteredUnrestorableError:(NSNotification *)notification {
+  NSError *unrestorableError = [notification hyperTrackUnrestorableError]);
+  // Handle UnrestorableError
+}
+```
+
+</details>
+
+---
+
+You can also observe when SDK starts and stops tracking and update the UI:
+
+###### Swift
+
+```swift
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(self.trackingStarted),
+  name: HyperTrack.startedTrackingNotification,
+  object: nil
+)
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(self.trackingStopped),
+  name: HyperTrack.stoppedTrackingNotification,
+  object: nil
+)
+```
+
+###### Objective-C
+
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(trackingStarted)
+                                             name:HTSDK.startedTrackingNotification
+                                           object:nil];
+
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(trackingStopped)
+                                             name:HTSDK.stoppedTrackingNotification
+                                           object:nil];
+```
 
 #### Step 5. Enable remote notifications
 
@@ -168,7 +361,7 @@ The SDK has a bi-directional communication model with the server. This enables t
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
 
-This key will only be used to send remote push notifications to your apps.
+This key will only be used to send silent push notifications to your apps.
 
 ##### Enable remote notifications in the app
 
@@ -283,75 +476,76 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 ```
 
-#### Step 6. (optional) Start and stop tracking manually
-
-You can start and stop tracking manually. When you start tracking you can control if HyperTrack should request the appropriate Location and Motion permissions on your behalf.
-
-##### Swift
-
-```swift
-/// Start tracking
-HyperTrack.startTracking(requestsPermissions: true)
-/// `requestsPermissions` is `true` by default so you can use the shortened version
-HyperTrack.startTracking()
-
-/// Stop tracking
-HyperTrack.stopTracking()
-```
-
-##### Objective-C
-
-```objc
-/// Start tracking
-[HTSDK startTrackingWithRequestsPermissions:true];
-
-/// Stop tracking
-[HTSDK stopTracking];
-```
-
-#### Step 7. (optional) Identify devices
+#### Step 6. (optional) Identify devices
 All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
 Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
 
 ##### Swift
 
 ```swift
-HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
-    /// Handle errors here
-}
+hyperTrack.setDeviceName("Device name")
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK setDeviceWithName:@"Device name"
-             andMetadata:nil
-       completionHandler:^(HTSDKDeviceNameError * _Nullable error) {
-           /// Handle errors here
-       }];
+hyperTrack.deviceName = @"Device name";
 ```
 
-#### Step 8. (optional) Set a trip marker
+You can additionaly tag devices with custom metadata. Metadata should be representable in JSON.
 
-Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
-
-The SDK supports sending trip marker data that can be converted to JSON from a `Dictionary` type.
 
 ##### Swift
 
 ```swift
-HyperTrack.setTripMarker(["trip keys": "trip values"]) { (error) in
-    /// Handle errors here
+if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
+  hyperTrack.setDeviceMetadata(metadata)
+} else {
+  // Metadata can't be represented in JSON
 }
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK setTripMarker:@{ @"trip keys": @"trip values" }
-   completionHandler:^(HTSDKCustomEventError * _Nullable error) {
-       /// Handle errors here
-   }];
+NSDictionary *dictionary = @{@"key": @"value"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack setDeviceMetadata:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+#### Step 7. (optional) Set a trip marker
+
+Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
+
+The process is the same as for device metadata:
+
+##### Swift
+
+```swift
+if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
+  hyperTrack.addTripMarker(metadata)
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+##### Objective-C
+
+```objc
+NSDictionary *dictionary = @{@"status": @"PICKING_UP"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack addTripMarker:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
+
 ```
 
 #### You are all set
