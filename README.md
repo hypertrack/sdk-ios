@@ -511,7 +511,7 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 ## Optional steps
 
 ### Identify devices 
-All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
+All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `deviceID` after initialization.
 Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
 
 ##### Swift
@@ -552,7 +552,7 @@ if (metadata != nil) {
 }
 ```
 
-### Set a trip marker 
+### Add a trip marker 
 
 Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 
