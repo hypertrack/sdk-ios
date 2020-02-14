@@ -1,46 +1,17 @@
-# HyperTrack iOS SDK
+# HyperTrack iOS SDK Integration Guide
 
-![GitHub](https://img.shields.io/github/license/hypertrack/sdk-ios.svg)
-![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
-![iOS SDK](https://img.shields.io/cocoapods/v/HyperTrack)
+[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
+Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons.
+This document contains a step by step guide how to integrate HyperTrack SDK with your app within minutes.
 
-[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons.
+HyperTrack iOS SDK supports iOS 9 and above, using Swift or Objective-C.
 
-* [Publishable Key](#publishable-key)–Sign up and get your keys
-* [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
-* [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
-* [FAQs](#frequently-asked-questions)–Frequently asked questions
-* [Support](#support)–Support
+## Create HyperTrack Account
 
-## Publishable Key
+[Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and 
+get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
-We use Publishable Key to identify your devices. To get one:
-1. Go to the [Signup page](https://dashboard.hypertrack.com/signup). Enter your email address and password.
-2. Open the verification link sent to your email.
-3. Open the [Setup page](https://dashboard.hypertrack.com/setup), where you can copy your Publishable Key.
-
-![Signup flow](Images/Signup_flow.png)
-
-Next, you can [start with the Quickstart app](https://github.com/hypertrack/quickstart-ios#quickstart-app), or can [integrate the SDK](#integrate-the-sdk) in your app.
-
-## Integrate the SDK
-
-### Requirements
-
-HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
-
-### Step by step instructions
-
-1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
-2. [Enable background location updates](#step-2-enable-background-location-updates)
-3. [Handle location and motion permissions](#step-3-handle-location-and-motion-permissions)
-4. [Initialize the SDK](#step-4-initialize-the-sdk)
-5. [Enable remote notifications](#step-5-enable-remote-notifications)
-6. [(optional) Identify devices](#step-6-optional-identify-devices)
-7. [(optional) Set trip markers](#step-7-optional-set-a-trip-marker)
-
-
-#### Step 1. Add HyperTrack SDK to your Podfile
+### Add HyperTrack SDK to your Podfile
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -79,13 +50,13 @@ end
 
 </details>
 
-#### Step 2. Enable background location updates
+### Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates".
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-#### Step 3. Handle location and motion permissions
+### Handle location and motion permissions
 
 Set the following purpose strings in the `Info.plist` file:
 
@@ -96,11 +67,11 @@ Be advised, purpose strings are mandatory.
 
 Your app needs to make sure that it has location and motion permissions for location tracking to work. See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
 
-#### Step 4. Initialize the SDK
+### Initialize the SDK
 
 Put the initialization call inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
 
-##### Swift
+#### Swift
 
 <details>
 <summary>Handling production/development errors:</summary>
@@ -131,7 +102,7 @@ if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
 
 </details>
 
-##### Objective-C
+#### Objective-C
 
 Import the SDK:
 
@@ -184,14 +155,14 @@ if (hyperTrack != nil) {
 
 </details>
 
-##### NSNotifications
+#### NSNotifications
 
 Restorable and Unrestorable error notifications are called if the SDK encounters an error that prevents it from tracking. SDK can recover in runtime from Restorable errors if the error reason is resolved. Errors include:
   - Initialization errors, like denied Location or Motion permissions (`RestorableError.locationPermissionsDenied`)
   - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`RestorableError.trialEnded`)
   - Incorrectly typed Publishable Key (`UnrestorableError.invalidPublishableKey`)
 
-###### Swift
+#### Swift
 
 <details>
 <summary>If you want to handle errors using the same selector:</summary>
@@ -255,7 +226,7 @@ NotificationCenter.default.addObserver(
 
 </details>
 
-###### Objective-C
+#### Objective-C
 
 <details>
 <summary>If you want to handle errors using the same selector:</summary>
@@ -320,7 +291,7 @@ NotificationCenter.default.addObserver(
 
 You can also observe when SDK starts and stops tracking and update the UI:
 
-###### Swift
+#### Swift
 
 ```swift
 NotificationCenter.default.addObserver(
@@ -337,7 +308,7 @@ NotificationCenter.default.addObserver(
 )
 ```
 
-###### Objective-C
+#### Objective-C
 
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self
@@ -351,19 +322,19 @@ NotificationCenter.default.addObserver(
                                            object:nil];
 ```
 
-#### Step 5. Enable remote notifications
+### Enable remote notifications
 
 The SDK has a bi-directional communication model with the server. This enables the SDK to run on a variable frequency model, which balances the fine trade-off between low latency tracking and battery efficiency, and improves robustness. For this purpose, the iOS SDK uses APNs silent remote notifications.
 
 > This guide assumes you have configured APNs in your application. If you haven't, read the [iOS documentation on APNs](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns).
 
-##### Configure APNs on the dashboard
+#### Configure APNs on the dashboard
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
 
 This key will only be used to send silent push notifications to your apps.
 
-##### Enable remote notifications in the app
+#### Enable remote notifications in the app
 
 In the app capabilities, ensure that **remote notifications** inside background modes is enabled.
 
@@ -373,11 +344,11 @@ In the same tab, ensure that **push notifications** is enabled.
 
 ![Push Notifications in Xcode](Images/Push_Notifications.png)
 
-##### Registering and receiving notifications
+#### Registering and receiving notifications
 
 The following changes inside AppDelegate will register the SDK for push notifications and route HyperTrack notifications to the SDK.
 
-###### Register for notifications
+#### Register for notifications
 
 Inside `didFinishLaunchingWithOptions`, use the SDK method to register for notifications.
 
@@ -399,7 +370,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-###### Register device token
+#### Register device token
 
 Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegisterForRemoteNotificationsWithError` methods, add the relevant lines so that HyperTrack can register the device token.
 
@@ -427,7 +398,7 @@ func application(_ application: UIApplication, didFailToRegisterForRemoteNotific
 }
 ```
 
-###### Receive notifications
+#### Receive notifications
 
 Inside the `didReceiveRemoteNotification` method, add the HyperTrack receiver. This method parses only the notifications sent from HyperTrack.
 
@@ -476,17 +447,17 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 ```
 
-#### Step 6. (optional) Identify devices
+### Identify devices (OPTIONAL)
 All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
 Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
 
-##### Swift
+#### Swift
 
 ```swift
 hyperTrack.setDeviceName("Device name")
 ```
 
-##### Objective-C
+#### Objective-C
 
 ```objc
 hyperTrack.deviceName = @"Device name";
@@ -495,7 +466,7 @@ hyperTrack.deviceName = @"Device name";
 You can additionaly tag devices with custom metadata. Metadata should be representable in JSON.
 
 
-##### Swift
+#### Swift
 
 ```swift
 if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
@@ -505,7 +476,7 @@ if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
 }
 ```
 
-##### Objective-C
+#### Objective-C
 
 ```objc
 NSDictionary *dictionary = @{@"key": @"value"};
@@ -518,13 +489,13 @@ if (metadata != nil) {
 }
 ```
 
-#### Step 7. (optional) Set a trip marker
+### Set a trip marker (OPTIONAL)
 
 Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 
 The process is the same as for device metadata:
 
-##### Swift
+#### Swift
 
 ```swift
 if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
@@ -534,7 +505,7 @@ if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
 }
 ```
 
-##### Objective-C
+#### Objective-C
 
 ```objc
 NSDictionary *dictionary = @{@"status": @"PICKING_UP"};
@@ -548,21 +519,107 @@ if (metadata != nil) {
 
 ```
 
-#### You are all set
+## Start tracking
 
-You can now run the app and start using HyperTrack. You can see your devices on the [dashboard](#dashboard).
+Now the app is ready to be tracked from the cloud. HyperTrack gives you powerful APIs
+to control device tracking from your backend.
+
+> To use the HyperTrack API, you will need the `{AccountId}` and `{SecretKey}` from the [Setup page](https://dashboard.hypertrack.com/setup).
+
+### Track devices during work
+
+Track devices when user is logged in to work, or during work hours by calling the 
+[Devices API](https://docs.hypertrack.com/#references-apis-devices).
+
+To start, call the [start](https://docs.hypertrack.com/?shell#references-apis-devices-post-devices-device_id-start) API.
+
+```
+curl -X POST \
+  -u {AccountId}:{SecretKey} \
+  https://v3.api.hypertrack.com/devices/{device_id}/start
+```
+
+
+Get the tracking status of the device by calling
+[GET /devices/{device_id}](https://docs.hypertrack.com/?shell#references-apis-devices-get-devices) api.
+
+```
+curl \
+  -u {AccountId}:{SecretKey} \
+  https://v3.api.hypertrack.com/devices/{device_id}
+```
+
+To see the device on a map, open the returned embed_url in your browser (no login required, so you can add embed these views directly to you web app).
+The device will also show up in the device list in the [HyperTrack dashboard](https://dashboard.hypertrack.com/).
+
+To stop tracking, call the [stop](https://docs.hypertrack.com/?shell#references-apis-devices-post-devices-device_id-stop) API.
+
+```
+curl -X POST \
+  -u {AccountId}:{SecretKey} \
+  https://v3.api.hypertrack.com/devices/{device_id}/stop
+```
+
+### Track trips with ETA
+
+If you want to track a device on its way to a destination, call the [Trips API](https://docs.hypertrack.com/#references-apis-trips-post-trips)
+and add destination.
+
+HyperTrack Trips API offers extra fields to get additional intelligence over the Devices API.
+* set destination to track route and ETA
+* set scheduled_at to track delays
+* share live tracking URL of the trip with customers 
+* embed live tracking view of the trip in your ops dashboard 
+
+```curl
+curl -u {AccountId}:{SecretKey} --location --request POST 'https://v3.api.hypertrack.com/trips/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "device_id": "{device_id}",
+    "destination": {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [{longitude}, {latitude}]
+        }
+    }
+}'
+```
+
+To get `{longitude}` and `{latitude}` of your destination, you can use for example [Google Maps](https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en).
+
+> HyperTrack uses [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON). Please make sure you follow the correct ordering of longitude and latitude.
+
+The returned JSON includes the embed_url for your dashboard and share_url for your customers.
+
+When you are done tracking this trip, call [complete](https://docs.hypertrack.com/#references-apis-trips-post-trips-trip_id-complete) Trip API using the `trip_id` from the create trip call above.
+```
+curl -X POST \
+  -u {AccountId}:{SecretKey} \
+  https://v3.api.hypertrack.com/trips/{trip_id}/complete
+```
+
+After the trip is completed, use the [Trips API](https://docs.hypertrack.com/#references-apis-trips-post-trips) to
+retrieve a full [summary](https://docs.hypertrack.com/#references-apis-trips-get-trips-trip_id-trip-summary) of the trip.
+The summary contains the polyline of the trip, distance, duration and markers of the trip.
+
+```
+curl -X POST \
+  -u {AccountId}:{SecretKey} \
+  https://v3.api.hypertrack.com/trips/{trip_id}
+```
+
+### Track trips with geofences
+
+If you want to track a device going to a list of places, call the [Trips API](https://docs.hypertrack.com/#references-apis-trips-post-trips)
+and add geofences. This way you will get arrival, exit, time spent and route to geofences. Please checkout our [docs](https://docs.hypertrack.com/#references-apis-trips-post-trips) for more details.
 
 ## Dashboard
 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
-![Dashboard](Images/Dashboard.png)
-
-
 ## Frequently Asked Questions
 - [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
 - [What are the best practices for handling permissions on iOS?](#what-are-the-best-practices-for-handling-permissions-on-ios)
-
 
 ### Error: Access to Activity services has not been authorized
 You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
