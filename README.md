@@ -70,7 +70,7 @@ Your app needs to make sure that it has location and motion permissions for loca
 
 Put the initialization call inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
 
-#### Swift
+##### Swift
 
 <details>
 <summary>Handling production/development errors:</summary>
@@ -101,7 +101,7 @@ if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
 
 </details>
 
-#### Objective-C
+##### Objective-C
 
 Import the SDK:
 
@@ -161,7 +161,7 @@ Restorable and Unrestorable error notifications are called if the SDK encounters
   - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`RestorableError.trialEnded`)
   - Incorrectly typed Publishable Key (`UnrestorableError.invalidPublishableKey`)
 
-#### Swift
+##### Swift
 
 <details>
 <summary>If you want to handle errors using the same selector:</summary>
@@ -225,7 +225,7 @@ NotificationCenter.default.addObserver(
 
 </details>
 
-#### Objective-C
+##### Objective-C
 
 <details>
 <summary>If you want to handle errors using the same selector:</summary>
@@ -290,7 +290,7 @@ NotificationCenter.default.addObserver(
 
 You can also observe when SDK starts and stops tracking and update the UI:
 
-#### Swift
+##### Swift
 
 ```swift
 NotificationCenter.default.addObserver(
@@ -307,7 +307,7 @@ NotificationCenter.default.addObserver(
 )
 ```
 
-#### Objective-C
+##### Objective-C
 
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self
@@ -351,7 +351,7 @@ The following changes inside AppDelegate will register the SDK for push notifica
 
 Inside `didFinishLaunchingWithOptions`, use the SDK method to register for notifications.
 
-**Swift**
+##### Swift
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -360,7 +360,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-**Objective-C**
+##### Objective-C
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -373,7 +373,8 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegisterForRemoteNotificationsWithError` methods, add the relevant lines so that HyperTrack can register the device token.
 
-**Swift**
+##### Swift
+
 
 ```swift
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -385,7 +386,7 @@ func application(_ application: UIApplication, didFailToRegisterForRemoteNotific
 }
 ```
 
-**Objective-C**
+##### Objective-C
 
 ```objc
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -401,7 +402,7 @@ func application(_ application: UIApplication, didFailToRegisterForRemoteNotific
 
 Inside the `didReceiveRemoteNotification` method, add the HyperTrack receiver. This method parses only the notifications sent from HyperTrack.
 
-**Swift**
+##### Swift
 
 ```swift
 func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -409,7 +410,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 }
 ```
 
-**Objective-C**
+##### Objective-C
 
 ```objc
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -419,7 +420,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 If you want to make sure to only pass HyperTrack notifications to the SDK, you can use the "hypertrack" key:
 
-**Swift**
+##### Swift
 
 ```swift
 func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -432,7 +433,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 }
 ```
 
-**Objective-C**
+##### Objective-C
 
 ```objc
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -442,78 +443,6 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
     } else {
         // Handle your server's notification here
     }
-}
-
-```
-
-### Identify devices (OPTIONAL)
-All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
-Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
-
-#### Swift
-
-```swift
-hyperTrack.setDeviceName("Device name")
-```
-
-#### Objective-C
-
-```objc
-hyperTrack.deviceName = @"Device name";
-```
-
-You can additionaly tag devices with custom metadata. Metadata should be representable in JSON.
-
-
-#### Swift
-
-```swift
-if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
-  hyperTrack.setDeviceMetadata(metadata)
-} else {
-  // Metadata can't be represented in JSON
-}
-```
-
-#### Objective-C
-
-```objc
-NSDictionary *dictionary = @{@"key": @"value"};
-
-HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
-if (metadata != nil) {
-  [self.hyperTrack setDeviceMetadata:metadata];
-} else {
-  // Metadata can't be represented in JSON
-}
-```
-
-### Set a trip marker (OPTIONAL)
-
-Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
-
-The process is the same as for device metadata:
-
-#### Swift
-
-```swift
-if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
-  hyperTrack.addTripMarker(metadata)
-} else {
-  // Metadata can't be represented in JSON
-}
-```
-
-#### Objective-C
-
-```objc
-NSDictionary *dictionary = @{@"status": @"PICKING_UP"};
-
-HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
-if (metadata != nil) {
-  [self.hyperTrack addTripMarker:metadata];
-} else {
-  // Metadata can't be represented in JSON
 }
 
 ```
@@ -616,15 +545,91 @@ and add geofences. This way you will get arrival, exit, time spent and route to 
 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
+## Optional steps
+
+### Identify devices 
+All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
+Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
+
+##### Swift
+
+```swift
+hyperTrack.setDeviceName("Device name")
+```
+
+##### Objective-C
+
+```objc
+hyperTrack.deviceName = @"Device name";
+```
+
+You can additionaly tag devices with custom metadata. Metadata should be representable in JSON.
+
+
+##### Swift
+
+```swift
+if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
+  hyperTrack.setDeviceMetadata(metadata)
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+##### Objective-C
+
+```objc
+NSDictionary *dictionary = @{@"key": @"value"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack setDeviceMetadata:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+### Set a trip marker 
+
+Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
+
+The process is the same as for device metadata:
+
+##### Swift
+
+```swift
+if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
+  hyperTrack.addTripMarker(metadata)
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+##### Objective-C
+
+```objc
+NSDictionary *dictionary = @{@"status": @"PICKING_UP"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack addTripMarker:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
+
+```
+
 ## Frequently Asked Questions
 
 <details>
   <summary><b>Error: Access to Activity services has not been authorized</b></summary>
+
 You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the app on real iOS devices only.
 </details>
 
 <details>
   <summary><b>What are the best practices for handling permissions on iOS?</summary>
+
 In [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/app-architecture/requesting-permission/) Apple recommends:
 - Requesting permissions only when they are needed in the flow of the app. If you app is centered around location tracking, then asking for permissions at the app launch can be understandable for users. On the other hand, if location tracking is just one of the features, then it makes sense to request them only when the feature is activated.
 - Providing short and specific purpose string. Purpose string should explain the value that location and motion tracking provides. Examples of motion tracking benefits: improves battery life by using algorithms based on motion tracking data, provides story-like details for historical tracking data, gives live feedback on current activity.
