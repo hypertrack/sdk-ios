@@ -592,7 +592,7 @@ You are running the quickstart app on the iOS simulator, which currently does no
 </details>
 
 <details>
-  <summary><b>What are the best practices for handling permissions on iOS?</summary>
+  <summary><b>What are the best practices for handling permissions on iOS?</b></summary>
 
 
 In [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/app-architecture/requesting-permission/) Apple recommends:
