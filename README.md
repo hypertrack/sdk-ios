@@ -72,9 +72,6 @@ Put the initialization call inside your `AppDelegate`'s `application:didFinishLa
 
 ##### Swift
 
-<details>
-<summary>Handling production/development errors:</summary>
-
 ```swift
 let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
 
@@ -86,21 +83,6 @@ case let .failure(fatalError):
 }
 ```
 
-</details>
-
-<details>
-<summary>Ignoring any errors:</summary>
-
-```swift
-let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
-
-if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
-  // Use `hyperTrack` instance
-}
-```
-
-</details>
-
 ##### Objective-C
 
 Import the SDK:
@@ -110,9 +92,6 @@ Import the SDK:
 ```
 
 Initialize the SDK.
-
-<details>
-<summary>Handling production/development errors:</summary>
 
 ```objc
 NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
@@ -137,22 +116,6 @@ if (result.hyperTrack != nil) {
   }
 }
 ```
-
-</details>
-
-<details>
-<summary>Ignoring errors:</summary>
-
-```objc
-NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
-
-HTSDK *hyperTrack = [[HTSDK alloc] initWithPublishableKey:publishableKey];
-if (hyperTrack != nil) {
-  // Use `hyperTrack` instance
-}
-```
-
-</details>
 
 #### NSNotifications
 
