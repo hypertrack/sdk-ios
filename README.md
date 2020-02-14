@@ -631,7 +631,7 @@ In [Human Interface Guidelines](https://developer.apple.com/design/human-interfa
 
 In addition a lot of great apps [provide a special screen](https://pttrns.com/?scid=56) explaining the need for permissions before asking them. If permissions are denied you can guide the user to the specific page in the Settings.app to change permissions (see [this guide](https://www.macstories.net/ios/a-comprehensive-guide-to-all-120-settings-urls-supported-by-ios-and-ipados-13-1/) for special deep-links for the Settings.app).
 
-On iOS 13 Apple introduced a new "Provisional Always" authorization state (see [this SO answer](https://stackoverflow.com/a/58822468/1352537) for details). In short:
+On iOS 13 Apple introduced a new "Provisional Always" authorization state (see [this StackOverflow answer](https://stackoverflow.com/a/58822468/1352537) for details). In short:
 
 - there is no API to detect this state
 - during this state there are no location events in background
