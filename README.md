@@ -594,6 +594,7 @@ You are running the quickstart app on the iOS simulator, which currently does no
 <details>
   <summary><b>What are the best practices for handling permissions on iOS?</summary>
 
+
 In [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/app-architecture/requesting-permission/) Apple recommends:
 - Requesting permissions only when they are needed in the flow of the app. If you app is centered around location tracking, then asking for permissions at the app launch can be understandable for users. On the other hand, if location tracking is just one of the features, then it makes sense to request them only when the feature is activated.
 - Providing short and specific purpose string. Purpose string should explain the value that location and motion tracking provides. Examples of motion tracking benefits: improves battery life by using algorithms based on motion tracking data, provides story-like details for historical tracking data, gives live feedback on current activity.
