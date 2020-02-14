@@ -588,6 +588,7 @@ if (metadata != nil) {
   <summary><b>Error: Access to Activity services has not been authorized</b></summary>
 
 You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the app on real iOS devices only.
+</p>
 </details>
 
 <details>
@@ -607,6 +608,7 @@ On iOS 13 Apple introduced a new "Provisional Always" authorization state (see [
 - app sees permissions as granted with "Always" state.
 
 HyperTrack is working on ways to detect this state and provide APIs that would enable app developers to display explanation screens that will guide the user back to Settings.app to switch permissions from "While Using" to "Always".
+</p>
 </details>
 
 ## Support
