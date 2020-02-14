@@ -11,7 +11,7 @@ HyperTrack iOS SDK supports iOS 9 and above, using Swift or Objective-C.
 [Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and 
 get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
-### Add HyperTrack SDK to your Podfile
+## Add HyperTrack SDK to your Podfile
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -49,13 +49,13 @@ end
 ```
 </details>
 
-### Enable background location updates
+## Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates".
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-### Handle location and motion permissions
+## Handle location and motion permissions
 
 Set the following purpose strings in the `Info.plist` file:
 
@@ -66,7 +66,7 @@ Be advised, purpose strings are mandatory.
 
 Your app needs to make sure that it has location and motion permissions for location tracking to work. See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
 
-### Initialize the SDK
+## Initialize the SDK
 
 Put the initialization call inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
 
@@ -284,19 +284,19 @@ NotificationCenter.default.addObserver(
                                            object:nil];
 ```
 
-### Enable remote notifications
+## Enable remote notifications
 
 The SDK has a bi-directional communication model with the server. This enables the SDK to run on a variable frequency model, which balances the fine trade-off between low latency tracking and battery efficiency, and improves robustness. For this purpose, the iOS SDK uses APNs silent remote notifications.
 
 > This guide assumes you have configured APNs in your application. If you haven't, read the [iOS documentation on APNs](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns).
 
-#### Configure APNs on the dashboard
+### Configure APNs on the dashboard
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
 
 This key will only be used to send silent push notifications to your apps.
 
-#### Enable remote notifications in the app
+### Enable remote notifications in the app
 
 In the app capabilities, ensure that **remote notifications** inside background modes is enabled.
 
@@ -306,11 +306,11 @@ In the same tab, ensure that **push notifications** is enabled.
 
 ![Push Notifications in Xcode](Images/Push_Notifications.png)
 
-#### Registering and receiving notifications
+### Registering and receiving notifications
 
 The following changes inside AppDelegate will register the SDK for push notifications and route HyperTrack notifications to the SDK.
 
-#### Register for notifications
+### Register for notifications
 
 Inside `didFinishLaunchingWithOptions`, use the SDK method to register for notifications.
 
@@ -332,7 +332,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-#### Register device token
+### Register device token
 
 Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegisterForRemoteNotificationsWithError` methods, add the relevant lines so that HyperTrack can register the device token.
 
@@ -361,7 +361,7 @@ func application(_ application: UIApplication, didFailToRegisterForRemoteNotific
 }
 ```
 
-#### Receive notifications
+### Receive notifications
 
 Inside the `didReceiveRemoteNotification` method, add the HyperTrack receiver. This method parses only the notifications sent from HyperTrack.
 
