@@ -47,7 +47,6 @@ post_install do |installer|
   end
 end
 ```
-
 </details>
 
 ### Enable background location updates
@@ -618,13 +617,14 @@ and add geofences. This way you will get arrival, exit, time spent and route to 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
 ## Frequently Asked Questions
-- [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
-- [What are the best practices for handling permissions on iOS?](#what-are-the-best-practices-for-handling-permissions-on-ios)
 
-### Error: Access to Activity services has not been authorized
-You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
+<details>
+  <summary><b>Error: Access to Activity services has not been authorized</b></summary>
+You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the app on real iOS devices only.
+</details>
 
-### What are the best practices for handling permissions on iOS?
+<details>
+  <summary><b>What are the best practices for handling permissions on iOS?</summary>
 In [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/app-architecture/requesting-permission/) Apple recommends:
 - Requesting permissions only when they are needed in the flow of the app. If you app is centered around location tracking, then asking for permissions at the app launch can be understandable for users. On the other hand, if location tracking is just one of the features, then it makes sense to request them only when the feature is activated.
 - Providing short and specific purpose string. Purpose string should explain the value that location and motion tracking provides. Examples of motion tracking benefits: improves battery life by using algorithms based on motion tracking data, provides story-like details for historical tracking data, gives live feedback on current activity.
@@ -639,6 +639,7 @@ On iOS 13 Apple introduced a new "Provisional Always" authorization state (see [
 - app sees permissions as granted with "Always" state.
 
 HyperTrack is working on ways to detect this state and provide APIs that would enable app developers to display explanation screens that will guide the user back to Settings.app to switch permissions from "While Using" to "Always".
+</details>
 
 ## Support
 Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
