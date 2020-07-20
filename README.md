@@ -1,4 +1,4 @@
-# HyperTrack iOS SDK Integration Guide
+# HyperTrack iOS SDK
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
 
