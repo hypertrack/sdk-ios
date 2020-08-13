@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.3.0] - 2020-08-13
+### Added
+- iPad support for all "WiFi + Cellular" iPad models from this [list](https://en.wikipedia.org/wiki/Apple_motion_coprocessors#Products) (iPad column) .
+
+### Fixed
+- Reduced network data usage.
+- Added workaround for iOS 13.3+ bug that causes the app to only receive low accuracy locations.
+- Improved app restart detection, by adding OS updates and app updates.
+
 ## [4.2.3] - 2020-07-28
 ### Fixed
 - Improved internal SDK to cloud API efficiency. Results in less number of requests and battery drain.
@@ -103,6 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.3.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.3.0
 [4.2.3]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.3
 [4.2.2]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.2
 [4.2.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.1
