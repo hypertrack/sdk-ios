@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.4.0] - 2020-09-09
+### Added
+- SDK automatically syncs up with the cloud. Improves tracking rates when silent push notifications fail or are disabled by the user.
+- Reduced battery consumption.
+- Reduced mobile data usage.
+- Configurability for automatic sync and tracking frequency. Configuration is server side, contact our support if you need non-standard tracking frequency.
+- Improved first location accuracy (important for trips, client side UX and distance calculations).
+- Support for the latest iPad model names in dashboard.
+
+### Deprecated
+- Motion denied error upon SDK initialization. If motion permissions were denied before first SDK initialization, SDK will still give you an instance with deviceID and will report lack of motion permissions in dashboard and APIs/web-hooks.
+
+### Fixed
+- SDK now correctly reports when tracking was interrupted due to device shutdown because of low battery.
+
 ## [4.3.0] - 2020-08-13
 ### Added
 - iPad support for all "WiFi + Cellular" iPad models from this [list](https://en.wikipedia.org/wiki/Apple_motion_coprocessors#Products) (iPad column) .
@@ -112,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.4.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.4.0
 [4.3.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.3.0
 [4.2.3]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.3
 [4.2.2]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.2
