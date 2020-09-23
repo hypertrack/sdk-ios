@@ -3,7 +3,7 @@
 import PackageDescription
 
 let name = "HyperTrack"
-let version = "4.5.0-rc.6"
+let version = "4.5.0-rc.7"
 
 let package = Package(
   name: name,
