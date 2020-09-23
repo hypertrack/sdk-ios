@@ -2,13 +2,13 @@ Pod::Spec.new do |spec|
 
   # Root specification
   spec.name                     = "HyperTrack"
-  spec.version                  = "4.5.0-rc.5"
+  spec.version                  = "4.5.0-rc.6"
   spec.summary                  = "A Movement tracking SDK for iOS"
   spec.description              = "HyperTrack is a Movement tracking SDK"
   spec.license                  = { :type => "Copyright", :text => "Copyright (c) 2020 HyperTrack, Inc. (https://www.hypertrack.com)" }
   spec.homepage                 = "https://hypertrack.com"
   spec.author                   = "HyperTrack Inc."
-  spec.source                   = { :http => "https://github.com/hypertrack/sdk-ios/releases/download/#{spec.version}/CocoaPods.zip" }
+  spec.source                   = { :http => "https://github.com/hypertrack/sdk-ios/releases/download/#{spec.version}/cocoapods.zip" }
   spec.swift_version            = "5.1"
   spec.cocoapods_version        = '>= 1.9.0'
 
@@ -19,12 +19,12 @@ Pod::Spec.new do |spec|
 
   spec.subspec "Swift" do |subspec|
     subspec.ios.vendored_frameworks  = 'HyperTrack.xcframework'
-    subspec.source_files             = 'CocoaPods/Swift/HyperTrack.xcframework'
+    subspec.source_files             = 'cocoapods/swift/HyperTrack.xcframework'
   end
 
   spec.subspec "Objective-C" do |subspec|
     subspec.ios.vendored_frameworks  = 'HyperTrack.xcframework'
-    subspec.source_files             = 'CocoaPods/ObjectiveC/HyperTrack.xcframework'
+    subspec.source_files             = 'cocoapods/objc/HyperTrack.xcframework'
   end
 
 end
