@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.0] - 2020-09-24
+### Added
+- iOS 14 support. If the user denies precise location access, an outage appears on the dashboard and is available through APIs.
+- Swift Package Manager support. Available on Xcode 12 and up. Use this URL `https://github.com/hypertrack/sdk-ios` when adding a package dependency.
+
+### Removed
+- GRDB dependency. Now SDK has no external dependencies.
+
 ## [4.4.0] - 2020-09-09
 ### Added
 - SDK automatically syncs up with the cloud. Improves tracking rates when silent push notifications fail or are disabled by the user.
@@ -127,6 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.5.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.0
 [4.4.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.4.0
 [4.3.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.3.0
 [4.2.3]: https://github.com/hypertrack/sdk-ios/releases/tag/4.2.3
