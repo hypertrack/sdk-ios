@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.6.0] - 2020-11-09
+### Added
+- Tracking intent sync with the platform to improve tracking control.
+### Changed
+- Geotags can be sent regardless of tracking status.
+- Changed reachability implementation.
+
 ## [4.5.1] - 2020-10-07
 ### Fixed
 - Fix for Xcode 11 integration, replaced Swift 5.2 feature to another one compatible with Swift 5.1
@@ -139,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.6.0
 [4.5.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.1
 [4.5.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.0
 [4.4.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.4.0
