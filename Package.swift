@@ -3,7 +3,7 @@
 import PackageDescription
 
 let name = "HyperTrack"
-let version = "4.7.0-rc.2"
+let version = "4.7.0-rc.3"
 
 let package = Package(
   name: name,
@@ -13,7 +13,7 @@ let package = Package(
     .binaryTarget(
       name: name,
       url: "https://github.com/hypertrack/sdk-ios/releases/download/\(version)/\(name).xcframework.zip",
-      checksum: "ea426458f3a4cae04e39f42e5a34b0cfd1355fb8b3ce6ae346ef9e7ac4a94f00"
+      checksum: "2f04f18740e7e9b8d995cae5e5ca3cf20445b3ccc8c6acdf8b4f0c30346cb169"
     )
   ],
   swiftLanguageVersions: [.v5]
