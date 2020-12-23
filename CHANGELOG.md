@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.7.0] - 2020-12-23
+### Changed
+- Improved health event generation.
+- Events that are stored in the SDK database and are older than 24 hours will be deleted automatically.
+### Fixed
+- Fixed issue with runtime error notifications.
+
 ## [4.6.0] - 2020-11-09
 ### Added
 - Tracking intent sync with the platform to improve tracking control.
@@ -146,6 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.7.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.7.0
 [4.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.6.0
 [4.5.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.1
 [4.5.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.0
