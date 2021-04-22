@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.8.0] - 2021-04-22
+### Added
+- SDK gets an additional fresh location fix every time the user brings the app to the foreground, improving geotag accuracy and trip destination triggers.
+### Changed
+- SDK no longer tries to wake up the app in the background to check if it should start tracking. As a result, the iOS dialog "... has used your location _ times in background over the past 3 days..." will appear only when the SDK was explicitly tracking.
+
 ## [4.7.0] - 2020-12-23
 ### Changed
 - Improved health event generation.
