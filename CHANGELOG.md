@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.9.0] - 2022-01-05
+### Added
+- Battery instrumentation support. You can see the current battery level in our REST APIs.
+### Fixed
+- Automatic sync is now active even after integrating the SDK without push notifications. Please be advised, push notification integration is mandatory for SDK operation.
+- Start tracking notification is now being called correctly when the app restarts after being killed while tracking. This should also fix any other cases where start/stop tracking notifications are missed or called multiple times in a row.
+
 ## [4.8.0] - 2021-04-22
 ### Added
 - SDK gets an additional fresh location fix every time the user brings the app to the foreground, improving geotag accuracy and trip destination triggers.
