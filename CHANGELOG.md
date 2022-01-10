@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.9.1] - 2022-01-10
+### Fixed
+- The SDK now builds on Xcode 12
+
 ## [4.9.0] - 2022-01-05
 ### Added
 - Battery instrumentation support. You can see the current battery level in our REST APIs.
@@ -166,6 +170,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.9.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.9.1
+[4.9.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.9.0
+[4.8.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.8.0
 [4.7.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.7.0
 [4.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.6.0
 [4.5.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.5.1
