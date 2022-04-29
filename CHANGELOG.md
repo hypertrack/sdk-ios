@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [4.11.1] - 2022-04-29
+### Fixed
+- Fixed Objective-C interface not having an error case for location getter.
+
 ## [4.11.0] - 2022-04-29
 ### Added
 - Current location getter allows to synchronously get the current location of the user or a reason for why it's not available.
@@ -183,6 +187,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.11.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.11.1
 [4.11.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.11.0
 [4.10.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.10.1
 [4.10.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.10.0
