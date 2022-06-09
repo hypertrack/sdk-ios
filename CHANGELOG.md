@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.12.0] - 2022-06-09
+### Added
+- SDK now reports simulated locations as an outage
+- Developers can simulate locations in development using the new `mockLocationsAllowed` property.
+
+### Changed
+- Logs are disabled by default now. Can be enabled using the new `isLoggingEnabled` type property.
 
 ## [4.11.1] - 2022-04-29
 ### Fixed
@@ -187,6 +194,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.12.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.0
 [4.11.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.11.1
 [4.11.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.11.0
 [4.10.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.10.1
