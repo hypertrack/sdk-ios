@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.12.4] - 2022-07-08
+### Fixed
+- Setting availability now immediately reflects in availability getter
+
 ## [4.12.3] - 2022-06-13
 ### Fixed
 - Notifications sending only when tracking and availability values change.
@@ -206,6 +210,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.12.4]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.4
 [4.12.3]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.3
 [4.12.2]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.2
 [4.12.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.1
