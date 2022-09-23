@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # Root specification
   spec.name                     = "HyperTrack"
-  spec.version                  = "4.12.4"
+  spec.version                  = "4.13.0"
   spec.summary                  = "A Movement tracking SDK for iOS"
   spec.description              = "HyperTrack is a Movement tracking SDK"
   spec.license                  = { :type => "Copyright", :text => "Copyright (c) 2020 HyperTrack, Inc. (https://www.hypertrack.com)" }
