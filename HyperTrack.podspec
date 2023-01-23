@@ -2,10 +2,10 @@ Pod::Spec.new do |spec|
 
   # Root specification
   spec.name                     = "HyperTrack"
-  spec.version                  = "4.14.0-rc.1"
+  spec.version                  = "4.14.0-rc.2"
   spec.summary                  = "A Movement tracking SDK for iOS"
   spec.description              = "HyperTrack is a Movement tracking SDK"
-  spec.license                  = { :type => "Copyright", :text => "Copyright (c) 2020 HyperTrack, Inc. (https://www.hypertrack.com)" }
+  spec.license                  = { :type => "Copyright", :text => "Copyright (c) 2023 HyperTrack, Inc. (https://www.hypertrack.com)" }
   spec.homepage                 = "https://hypertrack.com"
   spec.author                   = "HyperTrack Inc."
   spec.source                   = { :http => "https://github.com/hypertrack/sdk-ios/releases/download/#{spec.version}/cocoapods.zip" }
