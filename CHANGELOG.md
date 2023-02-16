@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.14.0] - 2023-02-16
+### Added
+- Automatic silent push notification integration using Swizzling. You no longer need to connect the methods manually in AppDelegate. At the same time there is no need to change anything in existing integrations.
+- New errors API that allow you to check if there is anything that can prevent the SDK from tracking at any point in time. This API returns all the errors that are currently affecting tracking, so you won't be able to miss any of them, like with the previous Notifications based APIs. This API can be invoked at any point in time, not just during tracking.
+- New subscription APIs, that allow you to subscribe to errors, isTracking, and availability. The current value will be delivered right after subscribing and all subsequent changes will be delivered as they happen.
+- New metadata API that allows you to set and get the current metadata for the driver in a type-safe JSON form. The JSON form supports all the convenient Representable family of Swift protocols that allows you to use the API as if specifying a native Dictinary value.
+
 ## [4.13.0] - 2022-09-23
 ### Changed
 - If the user simulates locations when it's prohibited, the SDK still passes real locations through if there are any.
@@ -214,6 +221,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.14.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.14.0
+[4.13.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.13.0
 [4.12.4]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.4
 [4.12.3]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.3
 [4.12.2]: https://github.com/hypertrack/sdk-ios/releases/tag/4.12.2
