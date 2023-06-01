@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.16.0] - 2023-06-01
+### Fixed
+- Fixed location not being collected in background on iOS 16.4 and upwards. Removed significant location change monitoring to comply with new requirements (https://developer.apple.com/forums/thread/726945?answerId=749230022#749230022).
+
+### Changed
+- Changed automatic permission request from Always to When In Use to avoid Provisional Always Authorization (https://hypertrack.com/blog/2020/06/24/impact-of-ios13-ios14-location-permissions-on-background-location-access/).
+
 ## [4.15.0] - 2023-05-19
 ### Added
 - New geotag with expected location API. When you know where the driver is supposed to make an action, attach a location to a geotag. This will calculate the deviation between the real position where it happened and the expected position. This information will also be available on dashboards and APIs.
@@ -228,6 +235,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[4.16.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.16.0
 [4.15.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.15.0
 [4.14.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.14.0
 [4.13.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.13.0
