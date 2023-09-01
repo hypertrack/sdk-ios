@@ -1,19 +1,19 @@
-// swift-tools-version:5.3
+// swift-tools-version: 5.7
 
 import PackageDescription
 
 let name = "HyperTrack"
-let version = "4.16.1"
+let version = "5.0.0"
 
 let package = Package(
   name: name,
-  platforms: [.iOS(.v11)],
+  platforms: [.iOS(.v12)],
   products: [.library(name: name, targets: [name])],
   targets: [
     .binaryTarget(
       name: name,
       url: "https://github.com/hypertrack/sdk-ios/releases/download/\(version)/\(name).xcframework.zip",
-      checksum: "cff7cb815b9efd2b144c255ecf916dbfbea50f5b38e41a37f4c0ddf4798778bf"
+      checksum: "3155bc0a8af3daa6eea1c0befc3ca23067b47cb05b56998d873e1ce209f67b90"
     )
   ],
   swiftLanguageVersions: [.v5]

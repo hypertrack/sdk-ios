@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2023-09-01
+### Added
+- TBA
+
 ## [4.16.1] - 2023-06-16
 ### Fixed
 - Stops significant location updates started by previous (pre 4.16.0) versions. This makes sure that the issue discovered in 4.16.0 is fixed even if the user kills the app while the SDK was tracking and updates to a 4.16.x.
@@ -239,6 +243,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[5.0.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.0
 [4.16.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.16.1
 [4.16.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.16.0
 [4.15.0]: https://github.com/hypertrack/sdk-ios/releases/tag/4.15.0
