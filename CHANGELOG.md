@@ -13,7 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.0.0] - 2023-09-01
 ### Added
-- TBA
+- New locate() API. Allows to get a location outside of a tracking session.
+- The SDK is always in sync with our cloud (if internet connection is present), there is no need to call sync() anymore.
+- The SDK now works in Simulator.
+
+### Changed
+- Minimum deployment target was increased to iOS 12.
+- The SDK API was fully redesigned to be more ergonomic and to require less code to use.
+- No need to initialize the SDK by setting publishable key. Now set the key in manifest file as `HyperTrackPublishableKey`. All API methods can be accessible at any time from any place in the app by calling them on the static HyperTrack class.
+
+### Removed
+- Activity permissions are no longer required.
+- sync() API is removed.
 
 ## [4.16.1] - 2023-06-16
 ### Fixed
