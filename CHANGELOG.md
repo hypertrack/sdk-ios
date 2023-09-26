@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.2] - 2023-09-26
+### Fixed
+- Fixed `addGeotag()` and `location` returning Errors when there is no intent to track.
+- Fixed rare cases when starting tracking remotely when the app is not running resulted in the SDK not updating locations until the user opens the app.
+
 ## [5.0.1] - 2023-09-13
 ### Fixed
 - Resolved an issue that could lead to data corruption if the app crashed during a write operation.
@@ -261,6 +266,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[5.0.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.2
 [5.0.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.1
 [5.0.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.0
 [4.16.1]: https://github.com/hypertrack/sdk-ios/releases/tag/4.16.1
