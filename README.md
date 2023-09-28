@@ -1,5 +1,5 @@
 # HyperTrack iOS SDK
-![GitHub](https://img.shields.io/github/license/hypertrack/sdk-ios.svg)
+![GitHub](https://img.shields.io/github/license/hypertrack/sdk-ios?color=orange)
 [![iOS SDK](https://img.shields.io/github/v/release/hypertrack/sdk-ios?label=iOS%20SDK)](https://cocoapods.org/pods/HyperTrack)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
