@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.4] - 2023-10-12
+### Fixed
+- Fixed location indicator displaying when not tracking.
+
 ## [5.0.3] - 2023-10-10
 ### Fixed
 - Fixed sending more network packets than needed when locate() API is used.
@@ -270,6 +274,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SDK now consumes less network data
 
 
+[5.0.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.4
 [5.0.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.3
 [5.0.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.2
 [5.0.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.1
