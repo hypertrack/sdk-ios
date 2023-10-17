@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimized app longevity after receiving a push notification while it's not in the foreground.
 
 ## [5.0.0] - 2023-09-01
-We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major update to our location tracking SDK. This release ensures highest tracking performance, reduces deployed app sizes and comes with an improved API to simplify the integrations. This is a breaking change from the previous major version. We highly recommend upgrading - Check out details of the all the improvements and changes here: TODO - ADD LINK
+We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major update to our location tracking SDK. This release ensures highest tracking performance, reduces deployed app sizes and comes with an improved API to simplify the integrations.  We highly recommend upgrading, but please note this is a breaking change from the previous major version.
 
 ### Changed
 - The SDK API was fully redesigned to be more ergonomic and to require less code to use.
