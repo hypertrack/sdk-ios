@@ -25,19 +25,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimized app longevity after receiving a push notification while it's not in the foreground.
 
 ## [5.0.0] - 2023-09-01
-### Added
-- New locate() API. Allows to get a location outside of a tracking session.
-- The SDK is always in sync with our cloud (if internet connection is present), there is no need to call sync() anymore.
-- The SDK now works in Simulator.
+We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major update to our location tracking SDK. This release ensures highest tracking performance, reduces deployed app sizes and comes with an improved API to simplify the integrations.  We highly recommend upgrading, but please note this is a breaking change from the previous major version.
 
 ### Changed
-- Minimum deployment target was increased to iOS 12.
+- **WARNING** ⚠️: The device ID will be changed after the update to this version.
 - The SDK API was fully redesigned to be more ergonomic and to require less code to use.
-- No need to initialize the SDK by setting publishable key. Now set the key in manifest file as `HyperTrackPublishableKey`. All API methods can be accessible at any time from any place in the app by calling them on the static HyperTrack class.
+- All the API methods can be accessible at any time from any place in the app by calling them on the static HyperTrack class.
+- No need to initialize the SDK by setting publishable key. Now set the key in `Info.plist` as `HyperTrackPublishableKey`. 
+- `HyperTrackError` enum is renamed to `HyperTrack.Error` and now has nested structure.
+- `availability` renamed to `isAvailable`
+- `subscribeToAvailability` renamed to `subscribeToIsAvailable`
+- Minimum deployment target was increased to iOS 12.
+
+### Added
+- New `locate()` API. Allows to get a one-time location and sends it to the cloud even when the device is not tracking or available.
+- The SDK is always in sync with our cloud (if internet connection is present), there is no need to call `syncDeviceSettings()` anymore.
+- `name` variable to set the user name associated with the device.
+- The SDK now works in Simulator.
 
 ### Removed
+- `HyperTrack.init()`, `HyperTrack.makeSDK()` (you can use `Info.plist` params to configure the SDK instead)
+  - `automaticallyRequestPermissions` init param is always false now (use `subscribeToErrors` to trigger permission requests)
+  - `mockLocationsAllowed` init param is always true now (but the device will send `Location.Mocked` error)
+- `start()`, `stop()` (use `isTracking` variable setter instead)
+- `setDeviceMetadata()` (use `metadata` variable setter instead)
+- `setDeviceName()` (use `name` variable setter instead)
+- `HyperTrackError` types:
+  - `motionActivityPermissionsDenied`
+  - `motionActivityServicesDisabled`
+  - `motionActivityServicesUnavailable`
+  - `motionActivityPermissionsRestricted`
+- `syncDeviceSettings()`
+- `mockLocationsAllowed`
+- `isLoggingEnabled` 
+- `isRunning`
+- `addGeotag(Metadata)` (use `addGeotag(JSON.Object)` instead)
+- `addTripMarker()` (use `addGeotag()` instead)
+- `HyperTrack.startedTrackingNotification`, `HyperTrack.stoppedTrackingNotification` (use `subscribeToIsTracking` instead)
+- `HyperTrack.becameAvailableNotification`, `HyperTrack.becameUnavailableNotification` (use `subscribeToIsAvailable` instead)
+- `HyperTrack.didEncounterRestorableErrorNotification`, `HyperTrack.didEncounterUnrestorableErrorNotification` (use `subscribeToErrors` instead)
 - Activity permissions are no longer required.
-- sync() API is removed.
+- Objective-C API.
 
 ## [4.16.1] - 2023-06-16
 ### Fixed
