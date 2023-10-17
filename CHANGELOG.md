@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major update to our location tracking SDK. This release ensures highest tracking performance, reduces deployed app sizes and comes with an improved API to simplify the integrations.  We highly recommend upgrading, but please note this is a breaking change from the previous major version.
 
 ### Changed
+- **WARNING** ⚠️: The device ID will be changed after the update to this version.
 - The SDK API was fully redesigned to be more ergonomic and to require less code to use.
 - All the API methods can be accessible at any time from any place in the app by calling them on the static HyperTrack class.
 - No need to initialize the SDK by setting publishable key. Now set the key in `Info.plist` as `HyperTrackPublishableKey`. 
