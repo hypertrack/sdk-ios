@@ -44,6 +44,8 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 ### Removed
 - `HyperTrack.init()`, `HyperTrack.makeSDK()` (you can use `Info.plist` params to configure the SDK instead)
+  - `automaticallyRequestPermissions` init param is always false now (use `subscribeToErrors` to trigger permission requests)
+  - `mockLocationsAllowed` init param is always true now (but the device will send `Location.Mocked` error)
 - `start()`, `stop()` (use `isTracking` variable setter instead)
 - `setDeviceMetadata()` (use `metadata` variable setter instead)
 - `setDeviceName()` (use `name` variable setter instead)
@@ -53,6 +55,8 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
   - `motionActivityServicesUnavailable`
   - `motionActivityPermissionsRestricted`
 - `syncDeviceSettings()`
+- `mockLocationsAllowed`
+- `isLoggingEnabled` 
 - `isRunning`
 - `addGeotag(Metadata)` (use `addGeotag(JSON.Object)` instead)
 - `addTripMarker()` (use `addGeotag()` instead)
