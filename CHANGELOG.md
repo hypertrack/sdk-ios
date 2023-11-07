@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.5] - 2023-11-07
+### Fixed
+- Fixed the SDK not sending device information when push notifications capability is not set in Xcode. 
+- Reduced a chance of generating a null (all zeroes) device_id.
+
 ## [5.0.4] - 2023-10-12
 ### Fixed
 - Fixed location indicator displaying when not tracking.
@@ -302,6 +307,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 - SDK now consumes less network data
 
 
+[5.0.5]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.5
 [5.0.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.4
 [5.0.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.3
 [5.0.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.2
