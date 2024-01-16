@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.0] - 2024-01-16
+### Added
+- Uses NTP servers to synchronize time independantly from the OS. Avoids sending data with wrong time information for users who override phone's settings with incorrect values.
+
+### Fixed
+- Optimized querying the Location Manager to reduce impact on battery life and main thread performance.
+- Mitigates SDK cache file corruption that led to some Android devices loading to device_id values with all zeroes.
+- Reduced network traffic.
+
 ## [5.1.0] - 2023-12-29
 ### Added
 - New dynamicPublishableKey API allows to set the publishable key later in the app lifecycle. Should only be used when there is no other way around it and it's impossible to know the publishable key in advance. Please contact us if this matches your use case.
