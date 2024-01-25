@@ -8,4 +8,4 @@ For information about how to get started with iOS SDK, please visit this [HyperT
 
 ## Reference
 
-[HyperTrack iOS SDK Reference](https://hypertrack.github.io/mobile/documentation/hypertrack/hypertrack)
+[HyperTrack iOS SDK Reference](https://hypertrack.github.io/mobile/sdk-ios/latest/documentation/hypertrack/hypertrack)
