@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.7-privacy-manifest] - 2024-04-15
+### Added
+- iOS: Bundle the Apple Privacy Manifest file as part of the SDK xcframework
+  - This change is required for all apps that depend on our SDK to pass AppStore review.
+  - More info in [the announcement](https://developer.apple.com/support/third-party-SDK-requirements/) and Apple docs about [Privacy manifest files](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)
 
 ## [5.0.7] - 2023-11-20
 ### Fixed
@@ -316,6 +321,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 - SDK now consumes less network data
 
 
+[5.0.7-privacy-manifest]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.7-privacy-manifest
 [5.0.7]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.7
 [5.0.6]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.6
 [5.0.5]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.5
