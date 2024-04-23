@@ -5,14 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.2] - 2024-04-23
+
+### Fixed
+
+- Fixed an edge case when a battery update would be skipped
+
 ## [5.5.1] - 2024-04-16
 
 ### Added
+
 - iOS: Bundle the Apple Privacy Manifest file as part of the SDK xcframework
   - This change is required for all apps that depend on our SDK to pass AppStore review.
   - More info in [the announcement](https://developer.apple.com/support/third-party-SDK-requirements/) and Apple docs about [Privacy manifest files](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)
 
 ### Changed
+
 - iOS: Background Location Indicator (Blue Pill)
   - Default behaviour has been changed to hidden on devices with "Always" location permission
   - Previously the indicator would always show, now only for devices with "While Using" permission
@@ -514,6 +522,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.5.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.2
 [5.5.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.1
 [5.5.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.0
 [5.4.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.4.1
