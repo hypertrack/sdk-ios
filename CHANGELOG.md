@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.7-privacy-manifest2] - 2024-04-26
+### Added
+- Added missing `NSPrivacyCollectedDataType`s to `PrivacyInfo.xcprivacy` manifest file
+  - CrashData, DiagnosticData, PerformanceData, DeviceID, UserID, CoarseLocation, PreciseLocation
+
 ## [5.0.7-privacy-manifest] - 2024-04-15
 ### Added
 - iOS: Bundle the Apple Privacy Manifest file as part of the SDK xcframework
@@ -321,6 +326,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 - SDK now consumes less network data
 
 
+[5.0.7-privacy-manifest2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.7-privacy-manifest2
 [5.0.7-privacy-manifest]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.7-privacy-manifest
 [5.0.7]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.7
 [5.0.6]: https://github.com/hypertrack/sdk-ios/releases/tag/5.0.6
