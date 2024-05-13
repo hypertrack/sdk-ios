@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.4] - 2024-05-13
+
+### Changed
+
+- Improved documentation for `addGeotag()` methods
+
+### Fixed
+
+- Protect against calling push completion handler multiple times
+- Fixes and improvements for internal error reporting
+- Fixed a bug that led to a small event loss
+
 ## [5.5.3] - 2024-04-26
 
 ### Added
@@ -529,6 +541,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.5.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.4
 [5.5.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.3
 [5.5.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.2
 [5.5.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.1
