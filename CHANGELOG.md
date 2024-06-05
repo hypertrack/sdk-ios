@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.6.0] - 2024-06-05
+
+### Added
+
+- 🆕 New `HyperTrack.workerHandle` property can be used to identify workers
+
+  - We observed our customers identify worker devices via `HyperTrack.metadata`, so we decided to make it a first class citizen in our API!
+  - If you previously used `metadata` to identify workers, we suggest using `workerHandle` for this purpose instead. 👈
+
+- Exposed a new `HyperTrackSwizzlingDidReceiveRemoteNotificationEnabled` Info.plist key that can be used to specifically disable swizzling of the `UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)` method.
+
 ## [5.5.4] - 2024-05-13
 
 ### Changed
@@ -541,6 +552,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.6.0
 [5.5.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.4
 [5.5.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.3
 [5.5.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.2
