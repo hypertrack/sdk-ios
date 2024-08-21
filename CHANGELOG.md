@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.0] - 2024-08-21
+
+### Added
+
+- Support for on-device geofencing via new `HyperTrack.orders["my_order"].isInsideGeofence` property
+  - To learn more about how to best use this new feature see our guide here: https://developer.hypertrack.com/docs/clock-in-out-tagging#verify-shift-presence-before-starting-work
+
+Example use for worker clock in:
+
+```
+func handlePresence(
+  _ isInsideResult: Result<Bool, HyperTrackLocationError>
+) {
+  switch isInsideResult {
+  case .success(let isInside):
+    if isInside {
+      // allow worker to clock in for the shift
+    } else {
+      // "to clock in you must be at order destination"
+    }
+  case .failure(let error):
+    // resolve any tracking errors to obtain geofence presence
+}
+
+// check if a worker is inside an order's geofence
+handlePresence(HyperTrack.orders["my_order"].isInsideGeofence)
+
+// or, listen to order.isInsideGeofence changes
+HyperTrack.subscribeToOrders { orders in
+  handlePresence(orders["my_order"].isInsideGeofence)
+}
+```
+
+### Changed
+
+- Changed the `OrderStatus` enum to a struct to support future cases without introducing API breaking changes
+
 ## [5.6.0] - 2024-06-05
 
 ### Added
