@@ -589,6 +589,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.7.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.7.0
 [5.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.6.0
 [5.5.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.4
 [5.5.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.3
