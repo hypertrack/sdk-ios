@@ -37,6 +37,9 @@ HyperTrack.subscribeToOrders { orders in
   handlePresence(orders["my_order"].isInsideGeofence)
 }
 ```
+- Added partial support for Motion Activity
+  - Our SDK doesn’t ask for motion permission
+  - For SDK 5.7.0 and above, `NSMotionUsageDescription` in your `Info.plist` is required (even if permission is not asked).
 
 ### Changed
 
