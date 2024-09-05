@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.8.0] - 2024-09-05
+
+### Added
+
+- Support for Motion & Activity detection
+  - If your app asks for permission and the user grants it, you will have better activity detection in polylines
+
 ## [5.7.0] - 2024-08-21
 
 ### Added
@@ -592,6 +599,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.8.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.8.0
 [5.7.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.7.0
 [5.6.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.6.0
 [5.5.4]: https://github.com/hypertrack/sdk-ios/releases/tag/5.5.4
