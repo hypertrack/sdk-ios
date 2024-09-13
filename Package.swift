@@ -12,7 +12,7 @@ let package = Package(
   targets: [
     .binaryTarget(
       name: name,
-      url: "https//github.com/hypertrack/sdk-ios/releases/download/\(version)/\(name).xcframework.zip",
+      url: "https://github.com/hypertrack/sdk-ios/releases/download/\(version)/\(name).xcframework.zip",
       checksum: "1d0173deb7a413bb93aedfe82e464af6bcfe30b9b8a2a89709a55dec10e08938"
     )
   ],
