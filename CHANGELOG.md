@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.10.0] - 2024-01-17
+
+### Added
+
+- New `HyperTrack.allowMockLocation` getter/setter which can be used to allow mock location(s).
+  - Use this API **only if** modifying the compiled `HyperTrackAllowMockLocation` Info.plist value is insufficient for your needs.
+    - example: if for some reason you aren't able to recompile with `HyperTrackAllowMockLocation` set to `YES` for your prod app QA mock location tests.
+
+### Changed
+
+- Fixes and improvements to SDK runtime efficiency
+
 ## [5.9.1] - 2024-12-05
 
 ### Changed
@@ -622,6 +634,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.10.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.10.0
 [5.9.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.9.1
 [5.9.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.9.0
 [5.8.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.8.1
