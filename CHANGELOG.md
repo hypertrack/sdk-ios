@@ -5,31 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.11.3] - 2024-03-14
+
+## [5.12.0] - 2025-10-17
+
+### Added
+
+- New `HyperTrack.orders.track(trackMode:orders:)` allows the creation and immediate tracking of order fulfillment.
+- New `HyperTrack.orders["order_id"].complete()` completes an order.
+- New `HyperTrack.orders["order_id"].cancel()` cancels an order.
+
+## [5.11.3] - 2025-03-14
 
 ### Changed
 
 - Fixes and improvements to SDK runtime efficiency
 
-## [5.11.2] - 2024-03-06
+## [5.11.2] - 2025-03-06
 
 ### Fixed
 
 - A race condition in which the user action of killing the app could potentially result in a small amount of events being discarded.
 
-## [5.11.1] - 2024-03-04
+## [5.11.1] - 2025-03-04
 
 ### Changed
 
 - Fixes and improvements to SDK runtime efficiency
 
-## [5.11.0] - 2024-02-03
+## [5.11.0] - 2025-02-03
 
 ### Changed
 
 - Fixes and improvements to SDK runtime efficiency
 
-## [5.10.0] - 2024-01-17
+## [5.10.0] - 2025-01-17
 
 ### Added
 
@@ -658,6 +667,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.12.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.12.0
 [5.11.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.11.3
 [5.11.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.11.2
 [5.11.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.11.1
