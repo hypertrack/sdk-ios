@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.13.0] - 2026-04-23
+
+### Changed
+
+- Improved responsiveness of order geofence crossing updates by flushing the crossing location together with the current batch.
+
+### Fixed
+
+- Fixed SDK exponential backoff so reconnection retries happen promptly after connectivity loss.
+- Fixed batching edge cases around battery-change location events.
+- Fixed cases where state attached to emitted events could be stale.
+
 ## [5.12.1] - 2025-11-18
 
 ### Fixed
@@ -672,6 +684,8 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.13.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.13.0
+[5.12.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.12.1
 [5.12.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.12.0
 [5.11.3]: https://github.com/hypertrack/sdk-ios/releases/tag/5.11.3
 [5.11.2]: https://github.com/hypertrack/sdk-ios/releases/tag/5.11.2
