@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.14.0] - 2026-08-21
+
+### Changed
+
+- Authentication and network connection retries now use jittered exponential backoff to improve recovery during service or connectivity outages.
+
+### Fixed
+
+- Fixed disallowed mocked locations being returned as valid locations or converted into unsuccessful geofence results. A `Mocked` location error is now returned consistently.
+- Fixed `HyperTrack.errors` and error subscriptions not reporting or clearing dynamic `SignalLost` and `Mocked` errors consistently.
+- Fixed mock-location policy changes not applying immediately to already received locations.
+- Fixed location batching issues that could lose pending locations during GPS signal loss, delay the first location after startup or recovery, duplicate stale location data after battery changes, or emit events out of order.
+- Fixed app lifecycle and screen state being missing or duplicated when changes occurred during SDK initialization.
+- Fixed API returning `NotRunning` or success instead of the blocked from running error.
+- Fixed a rare race where authentication could use a previous dynamic publishable key when keys are swapped during initialization.
+- Fixed SDK log files exceedig their configured size.
+- Fixed legacy cache corruption that could damage persisted tracking and availability state. The SDK now validates and repairs affected caches where possible.
+- Fixed SDK initialization and public API calls becoming stuck when phone storage was temporarily unavailable.
+- Fixed pending `locate` requests succeeding with a delayed location after a relevant location error had occurred.
+- Fixed cached locations masking `Starting` during initialization or `SignalLost` during GPS outages across location getters, subscriptions, geotags, and order geofence checks.
+- Fixed late Core Location callbacks being reported or used for geofence calculations after tracking had stopped.
+- Fixed error subscription transitions being missed when iOS delivers multiple locations in one callback.
+
 ## [5.13.0] - 2026-04-23
 
 ### Changed
@@ -684,6 +707,7 @@ We are excited to announce the release of HyperTrack iOS SDK 5.0.0, a major upda
 
 - SDK now consumes less network data
 
+[5.14.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.14.0
 [5.13.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.13.0
 [5.12.1]: https://github.com/hypertrack/sdk-ios/releases/tag/5.12.1
 [5.12.0]: https://github.com/hypertrack/sdk-ios/releases/tag/5.12.0
